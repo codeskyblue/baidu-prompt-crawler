@@ -63,6 +63,7 @@ def main():
     d = u2.connect()  # ("192.168.0.28")
     d.set_fastinput_ime(True)
     d.set_orientation('natural')
+    d.shell('am start -a android.intent.action.VIEW -d https://www.baidu.com')
 
     wb = load_workbook(filename=args.filename)
     sheet = wb[wb.sheetnames[0]]
@@ -115,13 +116,13 @@ def main():
     wb = Workbook()
     sheet = wb.active
     row = 1
-    index = 0
+    count = 0
     for keyword, buy_prompts in dicts.items():
         # if row > 10:
         #     break
-        index += 1
-        sheet.cell(row, 1).value = keyword
-        logger.debug("search %s, %d/%d", keyword, index, len(dicts))
+        count += 1
+        #sheet.cell(row, 1).value = keyword
+        logger.debug("search %s, %d/%d", keyword, count, len(dicts))
         baidu_prompts = list(search_words(d, keyword))
         product_name = product_names[keyword]
 
